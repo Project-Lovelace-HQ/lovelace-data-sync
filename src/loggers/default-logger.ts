@@ -7,10 +7,7 @@ const level = process.env.NODE_ENV === 'production' ? LoggerLevel.WARN : LoggerL
 
 const logger = winston.createLogger({
   level: level,
-  format: winston.format.combine(
-    winston.format.timestamp(),
-    winston.format.json()
-  ),
+  format: winston.format.combine(winston.format.timestamp(), winston.format.json()),
   defaultMeta: { service: ProjectInfo.PROJECT_SERVICE },
   transports: [
     new winston.transports.File({
