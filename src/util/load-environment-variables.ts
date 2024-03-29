@@ -3,23 +3,25 @@ import logger from '../loggers/default-logger';
 
 interface RequiredVariable {
   name: string;
-  expectedLength: number;
+  expectedLength?: number;
 }
 
 export function loadEnvironmentVariables() {
   const requiredVariables: RequiredVariable[] = [
     { name: 'NOTION_DATABASE_ID', expectedLength: 32 },
     { name: 'NOTION_KEY', expectedLength: 50 },
+    { name: 'NOTION_DATABASE_INTERESTED_COLUMN_NAME' },
   ];
 
   const errors: string[] = [];
 
   for (const variable of requiredVariables) {
     if (!process.env[variable.name]) {
-      errors.push(
-        `Invalid or missing required environment variable: ${variable.name}`
-      );
-    } else if (process.env[variable.name]?.length !== variable.expectedLength) {
+      errors.push(`Invalid or missing required environment variable: ${variable.name}`);
+    } else if (
+      variable.expectedLength &&
+      process.env[variable.name]?.length !== variable.expectedLength
+    ) {
       errors.push(`Invalid length for environment variable: ${variable.name}`);
     }
   }
