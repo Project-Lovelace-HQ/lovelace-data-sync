@@ -1,4 +1,6 @@
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
+
 import logger from '../loggers/default-logger';
 
 interface RequiredVariable {
