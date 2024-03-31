@@ -8,6 +8,7 @@
     "build": "npm run lint && tsc",
     "lint": "eslint 'src/**/*.{js,ts}'",
     "test": "jest",
+    "test-no-coverage": "npm test -- --coverage=false",
     "prepare": "husky"
   },
   "lint-staged": {
