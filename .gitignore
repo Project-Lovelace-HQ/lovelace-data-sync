@@ -14,8 +14,11 @@ yarn-error.log
 /build
 /dist
 
+# Custom scripts
+/*.sh
+
 # Environment variables
-.env
+*.env
 .env.local
 .env.development.local
 .env.test.local
@@ -38,3 +41,5 @@ yarn-error.log*
 *.js.map
 *.d.ts
 
+# SonarQube
+.scannerwork/
