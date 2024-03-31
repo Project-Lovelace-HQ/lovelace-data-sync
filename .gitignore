@@ -22,7 +22,6 @@ yarn-error.log
 .env.production.local
 
 # Editor and IDE files
-.vscode/
 .idea/
 *.sublime-project
 *.sublime-workspace
