@@ -2,7 +2,7 @@
   "name": "project-lovelace-api",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/main.js",
+  "main": "dist/src/main.js",
   "scripts": {
     "start": "ts-node src/main.ts",
     "build": "npm run lint && tsc",
