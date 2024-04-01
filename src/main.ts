@@ -3,37 +3,29 @@ import { loadEnvironmentVariables } from './util/load-environment-variables';
 // Load the environment variables and check for errors
 loadEnvironmentVariables();
 
-import {
-  PageObjectResponse,
-  QueryDatabaseResponse,
-} from '@notionhq/client/build/src/api-endpoints';
+import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 import logger from './loggers/default-logger';
-import createQueryLogger from './loggers/query-logger';
-import { getDatabasePages } from './notion-api/get-database-pages';
-import { filterDatabaseSubscribedPages } from './notion-api/filter-database-subscribed-pages';
-import { ProjectInfo } from './enums/project-info.enum';
+import { getDatabaseSubscribedPages } from './notion-api/get-database-subscribed-pages';
+import { mapDatabaseSubscribedPagesToLovelaceGamesUrl } from './notion-api/map-database-subscribed-pages';
+import { LovelaceGameUrl } from './notion-api/models/lovelace-game-url.model';
 
 async function main() {
   try {
     // Start the process by getting the database pages from the Notion API
-    const databasePages: QueryDatabaseResponse | undefined = await getDatabasePages(
+    const databaseSubscribedPages: QueryDatabaseResponse = await getDatabaseSubscribedPages(
       process.env.NOTION_DATABASE_ID as string
     );
 
-    if (!databasePages) return;
+    // Map the games which the user is subscribed to
+    const gamesUrl: LovelaceGameUrl[] =
+      mapDatabaseSubscribedPagesToLovelaceGamesUrl(databaseSubscribedPages);
 
-    const databasePagesResult: PageObjectResponse[] = databasePages.results as PageObjectResponse[];
-
-    // Filter the pages which the user is subscribed to
-    const subscribedPages = filterDatabaseSubscribedPages(databasePagesResult);
-
-    // Log the subscribed pages if in development mode
-    if (process.env.NODE_ENV === ProjectInfo.DEV_ENVIRONMENT) {
-      createQueryLogger('subscribed_pages').http(subscribedPages);
-    }
+    // Abort if there are no games
+    if (gamesUrl.length === 0) return;
   } catch (e) {
     if (e instanceof Error) {
       logger.error(e.message);
+      return;
     }
   }
 }

@@ -24,6 +24,7 @@ Notes about the Environment Variables:
 - The `NOTION_DATABASE_ID` is from a database connected to the integration stated above and can be simply retrieved from the URL of the database. Must have 32 characters.
 - The `NOTION_DATABASE_SUBSCRIPTION_COLUMN_NAME` is the **name** of the column in the database that defines if the user want to fetch updates on that game's price. It must be a `select` property.
 - The `NOTION_DATABASE_SUBSCRIPTION_COLUMN_POSITIVE_VALUE_NAME` is the **value** that should be in the property stated above for it to be accepted as true (if set to any other value the tracker will ignore this record).
+- The `NOTION_DATABASE_LUDOPEDIA_URL_COLUMN_NAME` is the **name** of the column in the database with the URL of the game in the Ludopedia website. It must be a `URL` property.
 - `NODE_ENV` can either be **development** or **production**.
 
 ### Running the application

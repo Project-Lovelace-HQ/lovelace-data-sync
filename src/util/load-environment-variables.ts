@@ -14,6 +14,7 @@ export function loadEnvironmentVariables() {
     { name: 'NOTION_KEY', expectedLength: 50 },
     { name: 'NOTION_DATABASE_SUBSCRIPTION_COLUMN_NAME' },
     { name: 'NOTION_DATABASE_SUBSCRIPTION_COLUMN_POSITIVE_VALUE_NAME' },
+    { name: 'NOTION_DATABASE_LUDOPEDIA_URL_COLUMN_NAME' },
   ];
 
   const errors: string[] = [];
