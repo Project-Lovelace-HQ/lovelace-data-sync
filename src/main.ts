@@ -10,7 +10,7 @@ import {
 import logger from './loggers/default-logger';
 import createQueryLogger from './loggers/query-logger';
 import { getDatabasePages } from './notion-api/get-database-pages';
-import { filterDatabaseRelevantPages } from './notion-api/parse-notion-json-file';
+import { filterDatabaseSubscribedPages } from './notion-api/filter-database-subscribed-pages';
 
 async function main() {
   try {
@@ -24,9 +24,9 @@ async function main() {
     const databasePagesResult: PageObjectResponse[] = databasePages.results as PageObjectResponse[];
 
     // Filter the pages so it only has the ones with the desired value
-    const relevantPages = filterDatabaseRelevantPages(databasePagesResult);
+    const subscribedPages = filterDatabaseSubscribedPages(databasePagesResult);
 
-    createQueryLogger('filtered_pages').http(relevantPages);
+    createQueryLogger('subscribed_pages').http(subscribedPages);
   } catch (e) {
     if (e instanceof Error) {
       logger.error(e.message);

@@ -1,8 +1,8 @@
 import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
-import { NotionPagePropertyValues } from '../enums/notion-table-values.enum';
+import { NotionPagePropertyValues } from '../enums/notion-page-property-values.enum';
 
 // Filter the Notion API response to get only the pages that match the criteria
-export function filterDatabaseRelevantPages(
+export function filterDatabaseSubscribedPages(
   databasePagesResult: PageObjectResponse[]
 ): PageObjectResponse[] {
   return databasePagesResult.filter((page) => {
