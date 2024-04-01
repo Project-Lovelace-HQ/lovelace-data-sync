@@ -12,7 +12,7 @@ export function loadEnvironmentVariables() {
   const requiredVariables: RequiredVariable[] = [
     { name: 'NOTION_DATABASE_ID', expectedLength: 32 },
     { name: 'NOTION_KEY', expectedLength: 50 },
-    { name: 'NOTION_DATABASE_INTERESTED_COLUMN_NAME' },
+    { name: 'NOTION_DATABASE_SUBSCRIPTION_COLUMN_NAME' },
   ];
 
   const errors: string[] = [];
