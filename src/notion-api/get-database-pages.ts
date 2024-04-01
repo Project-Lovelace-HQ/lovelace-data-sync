@@ -1,6 +1,7 @@
 import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 
 import createQueryLogger from '../loggers/query-logger';
+import { ProjectInfo } from '../enums/project-info.enum';
 
 // Notion SDK for JavaScript
 import { Client } from '@notionhq/client';
@@ -12,7 +13,7 @@ export async function getDatabasePages(databaseId: string): Promise<QueryDatabas
   });
 
   // Log the HTTP response only if in development mode
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === ProjectInfo.DEV_ENVIRONMENT) {
     createQueryLogger('database').http(myDatabasePagesResponse);
   }
 

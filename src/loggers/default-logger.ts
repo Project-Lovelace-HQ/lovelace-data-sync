@@ -3,7 +3,8 @@ import { ProjectInfo } from '../enums/project-info.enum';
 import { LoggerLevel } from './models/logger-level.enum';
 
 // Set log level to 'warn' in production, 'debug' in other environments
-const level = process.env.NODE_ENV === 'production' ? LoggerLevel.WARN : LoggerLevel.DEBUG;
+const level =
+  process.env.NODE_ENV === ProjectInfo.PROD_ENVIRONMENT ? LoggerLevel.WARN : LoggerLevel.DEBUG;
 
 const logger = winston.createLogger({
   level: level,
@@ -22,7 +23,7 @@ const logger = winston.createLogger({
   ],
 });
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== ProjectInfo.PROD_ENVIRONMENT) {
   logger.add(
     new winston.transports.Console({
       format: winston.format.combine(
