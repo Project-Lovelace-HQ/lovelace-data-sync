@@ -1,5 +1,4 @@
 import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
-import { NotionPagePropertyValues } from '../enums/notion-page-property-values.enum';
 
 // Filter the Notion API response to get only the pages that match the criteria
 export function filterDatabaseSubscribedPages(
@@ -16,6 +15,9 @@ export function filterDatabaseSubscribedPages(
       );
     }
 
-    return subscriptionStatusPageProperty.select?.name === NotionPagePropertyValues.POSITIVE_VALUE;
+    return (
+      subscriptionStatusPageProperty.select?.name ===
+      process.env.NOTION_DATABASE_SUBSCRIPTION_COLUMN_POSITIVE_VALUE_NAME
+    );
   });
 }
