@@ -1,6 +1,6 @@
 import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 import { filterDatabaseRelevantPages } from '../../src/notion-api/parse-notion-json-file';
-import { MockNotionDatabaseReponse } from '../resources/notion-database-response-example.model';
+import { MockNotionDatabaseResponse } from '../resources/notion-database-response-example.model';
 import { NotionTableValues } from '../../src/enums/notion-table-values.enum';
 
 describe('filterDatabaseRelevantPages', () => {
@@ -9,7 +9,7 @@ describe('filterDatabaseRelevantPages', () => {
   });
 
   it('fake test', () => {
-    const databasePagesResult: PageObjectResponse[] = MockNotionDatabaseReponse;
+    const databasePagesResult: PageObjectResponse[] = MockNotionDatabaseResponse;
 
     const filteredPages = filterDatabaseRelevantPages(databasePagesResult);
 
