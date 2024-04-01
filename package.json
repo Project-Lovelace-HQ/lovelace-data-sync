@@ -1,5 +1,5 @@
 {
-  "name": "project-lovelace-api",
+  "name": "lovelace-data-sync",
   "version": "1.0.0",
   "description": "",
   "main": "dist/src/main.js",

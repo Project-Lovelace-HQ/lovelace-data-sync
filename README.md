@@ -1,6 +1,8 @@
-# PROJECT LOVELACE API
+# LOVELACE DATA SYNC
 
-This project is a TypeScript-based API that interacts with the Notion API.
+This project is part of **Project Lovelace**, which aims to develop a price tracker for the [Ludopedia](https://ludopedia.com.br/) website and integrate it with a [Notion](https://www.notion.so) Database.
+
+ **Lovelace Data Sync**'s main goal is to interact with the [Notion API](https://developers.notion.com/) to update database contents when requested. It is built with Node.js and TypeScript.
 
 ## Getting Started
 

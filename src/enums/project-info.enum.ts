@@ -1,3 +1,3 @@
 export enum ProjectInfo {
-  PROJECT_SERVICE = 'project-lovelace-api',
+  PROJECT_SERVICE = 'lovelace-data-sync',
 }
