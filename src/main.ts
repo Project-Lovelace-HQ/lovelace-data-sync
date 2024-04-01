@@ -11,6 +11,7 @@ import logger from './loggers/default-logger';
 import createQueryLogger from './loggers/query-logger';
 import { getDatabasePages } from './notion-api/get-database-pages';
 import { filterDatabaseSubscribedPages } from './notion-api/filter-database-subscribed-pages';
+import { ProjectInfo } from './enums/project-info.enum';
 
 async function main() {
   try {
@@ -23,10 +24,13 @@ async function main() {
 
     const databasePagesResult: PageObjectResponse[] = databasePages.results as PageObjectResponse[];
 
-    // Filter the pages so it only has the ones with the desired value
+    // Filter the pages which the user is subscribed to
     const subscribedPages = filterDatabaseSubscribedPages(databasePagesResult);
 
-    createQueryLogger('subscribed_pages').http(subscribedPages);
+    // Log the subscribed pages if in development mode
+    if (process.env.NODE_ENV === ProjectInfo.DEV_ENVIRONMENT) {
+      createQueryLogger('subscribed_pages').http(subscribedPages);
+    }
   } catch (e) {
     if (e instanceof Error) {
       logger.error(e.message);
