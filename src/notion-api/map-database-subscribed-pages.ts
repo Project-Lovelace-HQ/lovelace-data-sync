@@ -4,15 +4,15 @@ import {
   PageObjectResponse,
   QueryDatabaseResponse,
 } from '@notionhq/client/build/src/api-endpoints';
-import { LovelaceGameUrl } from './models/lovelace-game-url.model';
+import { LovelaceSubscribedGameUrl } from '../models/lovelace-subscribed-game-url.model';
 import logger from '../loggers/default-logger';
 import { ProjectInfo } from '../enums/project-info.enum';
 import createQueryLogger from '../loggers/query-logger';
 
 // Map the database pages to get the URLs
-export function mapDatabaseSubscribedPagesToLovelaceGamesUrl(
+export function mapDatabaseSubscribedPagesToLovelaceSubscribedGamesUrl(
   databaseSubscribedPages: QueryDatabaseResponse
-): LovelaceGameUrl[] {
+): LovelaceSubscribedGameUrl[] {
   const databaseSubscribedPagesResult = databaseSubscribedPages.results as PageObjectResponse[];
 
   if (databaseSubscribedPagesResult.length === 0) {
@@ -22,7 +22,7 @@ export function mapDatabaseSubscribedPagesToLovelaceGamesUrl(
 
   const ludopediaUrlColumnName = process.env.NOTION_DATABASE_LUDOPEDIA_URL_COLUMN_NAME as string;
 
-  const lovelaceGamesUrl: LovelaceGameUrl[] = [];
+  const lovelaceSubscribedGamesUrl: LovelaceSubscribedGameUrl[] = [];
 
   databaseSubscribedPagesResult.forEach((page) => {
     const ludopediaUrlPageProperty = page.properties[ludopediaUrlColumnName];
@@ -44,7 +44,7 @@ export function mapDatabaseSubscribedPagesToLovelaceGamesUrl(
       return;
     }
 
-    lovelaceGamesUrl.push({
+    lovelaceSubscribedGamesUrl.push({
       id: page.id,
       url: ludopediaUrlPageProperty.url,
     });
@@ -52,8 +52,8 @@ export function mapDatabaseSubscribedPagesToLovelaceGamesUrl(
 
   // Log the subscribed pages if in development mode
   if (process.env.NODE_ENV === ProjectInfo.DEV_ENVIRONMENT) {
-    createQueryLogger('mapped_database_pages').http(lovelaceGamesUrl);
+    createQueryLogger('mapped_database_pages').http(lovelaceSubscribedGamesUrl);
   }
 
-  return lovelaceGamesUrl;
+  return lovelaceSubscribedGamesUrl;
 }

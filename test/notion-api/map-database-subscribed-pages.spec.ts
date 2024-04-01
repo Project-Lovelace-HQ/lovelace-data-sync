@@ -1,5 +1,5 @@
 import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
-import { mapDatabaseSubscribedPagesToLovelaceGamesUrl } from '../../src/notion-api/map-database-subscribed-pages';
+import { mapDatabaseSubscribedPagesToLovelaceSubscribedGamesUrl } from '../../src/notion-api/map-database-subscribed-pages';
 import { MockNotionQueryDatabaseResponse } from '../resources/notion-query-database-response-example.model';
 
 const ludopediaUrlColumnName = 'URL';
@@ -12,7 +12,9 @@ describe('mapDatabaseSubscribedPages', () => {
   it('#mapDatabaseSubscribedPagesToLovelaceGamesUrl', () => {
     const mockDatabaseSubscribedPages: QueryDatabaseResponse = MockNotionQueryDatabaseResponse;
 
-    const gamesUrl = mapDatabaseSubscribedPagesToLovelaceGamesUrl(mockDatabaseSubscribedPages);
+    const gamesUrl = mapDatabaseSubscribedPagesToLovelaceSubscribedGamesUrl(
+      mockDatabaseSubscribedPages
+    );
 
     expect(gamesUrl).toHaveLength(1);
     expect(gamesUrl[0].id).toBe('1234');
