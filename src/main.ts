@@ -6,8 +6,8 @@ loadEnvironmentVariables();
 import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 import logger from './loggers/default-logger';
 import { getDatabaseSubscribedPages } from './notion-api/get-database-subscribed-pages';
-import { mapDatabaseSubscribedPagesToLovelaceGamesUrl } from './notion-api/map-database-subscribed-pages';
-import { LovelaceGameUrl } from './models/lovelace-game-url.model';
+import { mapDatabaseSubscribedPagesToLovelaceSubscribedGamesUrl } from './notion-api/map-database-subscribed-pages';
+import { LovelaceSubscribedGameUrl } from './models/lovelace-subscribed-game-url.model';
 
 async function main() {
   try {
@@ -17,11 +17,11 @@ async function main() {
     );
 
     // Map the games which the user is subscribed to
-    const gamesUrl: LovelaceGameUrl[] =
-      mapDatabaseSubscribedPagesToLovelaceGamesUrl(databaseSubscribedPages);
+    const subscribedGamesUrl: LovelaceSubscribedGameUrl[] =
+      mapDatabaseSubscribedPagesToLovelaceSubscribedGamesUrl(databaseSubscribedPages);
 
     // Abort if there are no games
-    if (gamesUrl.length === 0) return;
+    if (subscribedGamesUrl.length === 0) return;
   } catch (e) {
     if (e instanceof Error) {
       logger.error(e.message);
