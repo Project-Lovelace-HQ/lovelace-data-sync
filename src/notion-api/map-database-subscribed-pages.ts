@@ -4,7 +4,7 @@ import {
   PageObjectResponse,
   QueryDatabaseResponse,
 } from '@notionhq/client/build/src/api-endpoints';
-import { LovelaceGameUrl } from './models/lovelace-game-url.model';
+import { LovelaceGameUrl } from '../models/lovelace-game-url.model';
 import logger from '../loggers/default-logger';
 import { ProjectInfo } from '../enums/project-info.enum';
 import createQueryLogger from '../loggers/query-logger';

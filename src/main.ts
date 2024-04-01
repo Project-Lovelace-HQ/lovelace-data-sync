@@ -7,7 +7,7 @@ import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints'
 import logger from './loggers/default-logger';
 import { getDatabaseSubscribedPages } from './notion-api/get-database-subscribed-pages';
 import { mapDatabaseSubscribedPagesToLovelaceGamesUrl } from './notion-api/map-database-subscribed-pages';
-import { LovelaceGameUrl } from './notion-api/models/lovelace-game-url.model';
+import { LovelaceGameUrl } from './models/lovelace-game-url.model';
 
 async function main() {
   try {
