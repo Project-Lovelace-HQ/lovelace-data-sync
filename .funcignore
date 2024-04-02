@@ -11,3 +11,11 @@ tsconfig.json
 node_modules/@types/
 node_modules/azure-functions-core-tools/
 node_modules/typescript/
+/*.sh
+/*.md
+/.azurite
+/.scannerwork
+/logs
+sonar.env
+.env.example
+.env
