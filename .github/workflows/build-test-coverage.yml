@@ -33,6 +33,5 @@ jobs:
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          slug: Project-Lovelace-HQ/lovelace-data-sync
           files: ./coverage/lcov.info
           # fail_ci_if_error: true
