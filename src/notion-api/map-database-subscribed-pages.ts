@@ -6,7 +6,6 @@ import {
 } from '@notionhq/client/build/src/api-endpoints';
 import { LovelaceSubscribedGameUrl } from '../models/lovelace-subscribed-game-url.model';
 import logger from '../loggers/default-logger';
-import { ProjectInfo } from '../enums/project-info.enum';
 import createQueryLogger from '../loggers/query-logger';
 
 // Map the database pages to get the URLs
@@ -50,10 +49,8 @@ export function mapDatabaseSubscribedPagesToLovelaceSubscribedGamesUrl(
     });
   });
 
-  // Log the subscribed pages if in development mode
-  if (process.env.NODE_ENV === ProjectInfo.DEV_ENVIRONMENT) {
-    createQueryLogger('mapped_database_pages').http(lovelaceSubscribedGamesUrl);
-  }
+  // Log the subscribed pages
+  createQueryLogger('mapped_database_pages').http(lovelaceSubscribedGamesUrl);
 
   return lovelaceSubscribedGamesUrl;
 }

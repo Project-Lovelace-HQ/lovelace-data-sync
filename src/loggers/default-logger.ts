@@ -10,29 +10,27 @@ const logger = winston.createLogger({
   level: level,
   format: winston.format.combine(winston.format.timestamp(), winston.format.json()),
   defaultMeta: { service: ProjectInfo.PROJECT_SERVICE },
-  transports: [
-    new winston.transports.File({
-      filename: 'logs/error.log',
-      level: LoggerLevel.ERROR,
-      lazy: true,
-    }),
-    new winston.transports.File({
-      filename: 'logs/combined.log',
-      lazy: true,
-    }),
-  ],
+  transports: new winston.transports.Console({
+    format: winston.format.combine(
+      winston.format.printf(({ level, message }) => `${level}: ${message}\n`)
+    ),
+  }),
 });
 
 if (process.env.NODE_ENV !== ProjectInfo.PROD_ENVIRONMENT) {
   logger.add(
-    new winston.transports.Console({
-      format: winston.format.combine(
-        winston.format.printf(({ level, message }) => `${level}: ${message}\n`)
-      ),
+    new winston.transports.File({
+      filename: 'logs/error.log',
+      level: LoggerLevel.ERROR,
+      lazy: true,
     })
   );
-
-  logger.info('Not running in production mode. Logging to console.');
+  logger.add(
+    new winston.transports.File({
+      filename: 'logs/combined.log',
+      lazy: true,
+    })
+  );
 }
 
 export default logger;

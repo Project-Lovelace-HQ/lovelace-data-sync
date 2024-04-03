@@ -1,7 +1,6 @@
 import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 
 import createQueryLogger from '../loggers/query-logger';
-import { ProjectInfo } from '../enums/project-info.enum';
 
 // Notion SDK for JavaScript
 import { Client } from '@notionhq/client';
@@ -26,10 +25,8 @@ export async function getDatabaseSubscribedPages(
     },
   });
 
-  // Log the HTTP response only if in development mode
-  if (process.env.NODE_ENV === ProjectInfo.DEV_ENVIRONMENT) {
-    createQueryLogger('subscribed_database_pages').http(databaseSubscribedPages);
-  }
+  // Log the HTTP response
+  createQueryLogger('subscribed_database_pages').http(databaseSubscribedPages);
 
   return databaseSubscribedPages;
 }
