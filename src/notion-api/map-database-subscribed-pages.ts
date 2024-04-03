@@ -1,12 +1,11 @@
-import validator from 'validator';
-
 import {
   PageObjectResponse,
   QueryDatabaseResponse,
 } from '@notionhq/client/build/src/api-endpoints';
-import { LovelaceSubscribedGameUrl } from '../models/lovelace-subscribed-game-url.model';
+import validator from 'validator';
 import { createLogger } from '../loggers/default-logger';
 import { createQueryLogger } from '../loggers/query-logger';
+import { LovelaceSubscribedGameUrl } from '../models/lovelace-subscribed-game-url.model';
 
 // Map the database pages to get the URLs
 export function mapDatabaseSubscribedPagesToLovelaceSubscribedGamesUrl(
@@ -50,7 +49,7 @@ export function mapDatabaseSubscribedPagesToLovelaceSubscribedGamesUrl(
   });
 
   // Log the subscribed pages
-  createQueryLogger('mapped_database_pages').http(lovelaceSubscribedGamesUrl);
+  createQueryLogger('mapped_database_pages').http(JSON.stringify(lovelaceSubscribedGamesUrl));
 
   return lovelaceSubscribedGamesUrl;
 }

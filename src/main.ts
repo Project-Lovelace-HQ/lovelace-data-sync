@@ -1,11 +1,10 @@
-import { loadEnvironmentVariables } from './util/load-environment-variables';
-import { createLogger } from './loggers/default-logger';
-
 import { app, HttpResponseInit } from '@azure/functions';
 import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
+import { createLogger } from './loggers/default-logger';
 import { LovelaceSubscribedGameUrl } from './models/lovelace-subscribed-game-url.model';
 import { getDatabaseSubscribedPages } from './notion-api/get-database-subscribed-pages';
 import { mapDatabaseSubscribedPagesToLovelaceSubscribedGamesUrl } from './notion-api/map-database-subscribed-pages';
+import { loadEnvironmentVariables } from './util/load-environment-variables';
 
 export async function main(): Promise<HttpResponseInit> {
   try {
@@ -13,9 +12,7 @@ export async function main(): Promise<HttpResponseInit> {
     loadEnvironmentVariables();
 
     // Start the process by getting the database pages from the Notion API
-    const databaseSubscribedPages: QueryDatabaseResponse = await getDatabaseSubscribedPages(
-      process.env.NOTION_DATABASE_ID as string
-    );
+    const databaseSubscribedPages: QueryDatabaseResponse = await getDatabaseSubscribedPages();
 
     // Map the games which the user is subscribed to
     const subscribedGamesUrl: LovelaceSubscribedGameUrl[] =

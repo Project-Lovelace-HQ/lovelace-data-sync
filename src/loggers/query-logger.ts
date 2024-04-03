@@ -1,6 +1,5 @@
-import winston from 'winston';
 import moment from 'moment';
-
+import winston from 'winston';
 import { ProjectInfo } from '../enums/project-info.enum';
 import { LoggerLevel } from './models/logger-level.enum';
 
@@ -9,7 +8,7 @@ export function createQueryLogger(name: string) {
   // Get current local time
   const timestamp = moment().format('YYYY-MM-DD_HH-mm-ss');
 
-  const devTransporter = new winston.transports.File({
+  const defaultTransporter = new winston.transports.File({
     filename: `logs/query_${name}_${timestamp}.json`,
     level: LoggerLevel.HTTP,
     lazy: true,
@@ -22,11 +21,12 @@ export function createQueryLogger(name: string) {
     ),
   });
 
+  // Log to console in production, to files in other environments
   return winston.createLogger({
     level: LoggerLevel.HTTP,
     format: winston.format.json(),
     defaultMeta: { service: ProjectInfo.PROJECT_SERVICE },
     transports:
-      process.env.NODE_ENV !== ProjectInfo.PROD_ENVIRONMENT ? devTransporter : prodTransporter,
+      process.env.NODE_ENV !== ProjectInfo.PROD_ENVIRONMENT ? defaultTransporter : prodTransporter,
   });
 }
