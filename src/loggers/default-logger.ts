@@ -2,35 +2,37 @@ import winston from 'winston';
 import { ProjectInfo } from '../enums/project-info.enum';
 import { LoggerLevel } from './models/logger-level.enum';
 
-// Set log level to 'warn' in production, 'debug' in other environments
-const level =
-  process.env.NODE_ENV === ProjectInfo.PROD_ENVIRONMENT ? LoggerLevel.WARN : LoggerLevel.DEBUG;
+export function createLogger() {
+  // Set log level to 'warn' in production, 'debug' in other environments
+  const level =
+    process.env.NODE_ENV === ProjectInfo.PROD_ENVIRONMENT ? LoggerLevel.WARN : LoggerLevel.DEBUG;
 
-const logger = winston.createLogger({
-  level: level,
-  format: winston.format.combine(winston.format.timestamp(), winston.format.json()),
-  defaultMeta: { service: ProjectInfo.PROJECT_SERVICE },
-  transports: new winston.transports.Console({
-    format: winston.format.combine(
-      winston.format.printf(({ level, message }) => `${level}: ${message}\n`)
-    ),
-  }),
-});
+  const logger = winston.createLogger({
+    level: level,
+    format: winston.format.combine(winston.format.timestamp(), winston.format.json()),
+    defaultMeta: { service: ProjectInfo.PROJECT_SERVICE },
+    transports: new winston.transports.Console({
+      format: winston.format.combine(
+        winston.format.printf(({ level, message }) => `${level}: ${message}\n`)
+      ),
+    }),
+  });
 
-if (process.env.NODE_ENV !== ProjectInfo.PROD_ENVIRONMENT) {
-  logger.add(
-    new winston.transports.File({
-      filename: 'logs/error.log',
-      level: LoggerLevel.ERROR,
-      lazy: true,
-    })
-  );
-  logger.add(
-    new winston.transports.File({
-      filename: 'logs/combined.log',
-      lazy: true,
-    })
-  );
+  if (process.env.NODE_ENV !== ProjectInfo.PROD_ENVIRONMENT) {
+    logger.add(
+      new winston.transports.File({
+        filename: 'logs/error.log',
+        level: LoggerLevel.ERROR,
+        lazy: true,
+      })
+    );
+    logger.add(
+      new winston.transports.File({
+        filename: 'logs/combined.log',
+        lazy: true,
+      })
+    );
+  }
+
+  return logger;
 }
-
-export default logger;

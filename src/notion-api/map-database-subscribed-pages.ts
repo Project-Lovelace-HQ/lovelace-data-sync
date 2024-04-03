@@ -5,8 +5,8 @@ import {
   QueryDatabaseResponse,
 } from '@notionhq/client/build/src/api-endpoints';
 import { LovelaceSubscribedGameUrl } from '../models/lovelace-subscribed-game-url.model';
-import logger from '../loggers/default-logger';
-import createQueryLogger from '../loggers/query-logger';
+import { createLogger } from '../loggers/default-logger';
+import { createQueryLogger } from '../loggers/query-logger';
 
 // Map the database pages to get the URLs
 export function mapDatabaseSubscribedPagesToLovelaceSubscribedGamesUrl(
@@ -15,7 +15,7 @@ export function mapDatabaseSubscribedPagesToLovelaceSubscribedGamesUrl(
   const databaseSubscribedPagesResult = databaseSubscribedPages.results as PageObjectResponse[];
 
   if (databaseSubscribedPagesResult.length === 0) {
-    logger.warn('No subscribed pages found');
+    createLogger().warn('No subscribed pages found');
     return [];
   }
 
@@ -39,7 +39,7 @@ export function mapDatabaseSubscribedPagesToLovelaceSubscribedGamesUrl(
     }
 
     if (!ludopediaUrlPageProperty.url || !validator.isURL(ludopediaUrlPageProperty.url)) {
-      logger.warn(`No valid URL found for page ${page.id}, skipping...`);
+      createLogger().warn(`No valid URL found for page ${page.id}, skipping...`);
       return;
     }
 

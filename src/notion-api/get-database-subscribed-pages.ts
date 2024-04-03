@@ -1,6 +1,6 @@
 import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 
-import createQueryLogger from '../loggers/query-logger';
+import { createQueryLogger } from '../loggers/query-logger';
 
 // Notion SDK for JavaScript
 import { Client } from '@notionhq/client';

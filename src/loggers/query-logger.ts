@@ -5,7 +5,7 @@ import { ProjectInfo } from '../enums/project-info.enum';
 import { LoggerLevel } from './models/logger-level.enum';
 
 // Logger for saving queries with timestamp
-function createQueryLogger(name: string) {
+export function createQueryLogger(name: string) {
   // Get current local time
   const timestamp = moment().format('YYYY-MM-DD_HH-mm-ss');
 
@@ -30,5 +30,3 @@ function createQueryLogger(name: string) {
       process.env.NODE_ENV !== ProjectInfo.PROD_ENVIRONMENT ? devTransporter : prodTransporter,
   });
 }
-
-export default createQueryLogger;

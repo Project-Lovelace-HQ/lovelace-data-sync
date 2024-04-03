@@ -47,7 +47,6 @@
   "dependencies": {
     "@azure/functions": "^4.4.0",
     "@notionhq/client": "^2.2.14",
-    "dotenv": "^16.4.5",
     "moment": "^2.30.1",
     "validator": "^13.11.0",
     "winston": "^3.13.0"

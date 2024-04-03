@@ -1,9 +1,5 @@
 import { loadEnvironmentVariables } from './util/load-environment-variables';
-
-// Load the environment variables and check for errors
-loadEnvironmentVariables();
-
-import logger from './loggers/default-logger';
+import { createLogger } from './loggers/default-logger';
 
 import { app, HttpResponseInit } from '@azure/functions';
 import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
@@ -13,6 +9,9 @@ import { mapDatabaseSubscribedPagesToLovelaceSubscribedGamesUrl } from './notion
 
 export async function main(): Promise<HttpResponseInit> {
   try {
+    // Load the environment variables and check for errors
+    loadEnvironmentVariables();
+
     // Start the process by getting the database pages from the Notion API
     const databaseSubscribedPages: QueryDatabaseResponse = await getDatabaseSubscribedPages(
       process.env.NOTION_DATABASE_ID as string
@@ -37,7 +36,7 @@ export async function main(): Promise<HttpResponseInit> {
       errorMessage = e;
     }
 
-    logger.error(errorMessage);
+    createLogger().error(errorMessage);
 
     return {
       status: 500,
