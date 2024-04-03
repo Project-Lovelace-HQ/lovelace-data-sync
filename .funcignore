@@ -15,8 +15,8 @@ local.settings.json
 local.settings.example.json
 test/
 logs/
-/*.sh
-/*.md
+*.sh
+*.md
 .env
 .env.example
 *.env
