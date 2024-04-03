@@ -1,8 +1,3 @@
-import dotenv from 'dotenv';
-dotenv.config();
-
-import logger from '../loggers/default-logger';
-
 interface RequiredVariable {
   name: string;
   expectedLength?: number;
@@ -31,9 +26,6 @@ export function loadEnvironmentVariables() {
   }
 
   if (errors.length > 0) {
-    logger.error(errors.join('\n'), () => {
-      logger.on('finish', () => process.exit(1));
-      logger.end();
-    });
+    throw new Error(errors.join('\n'));
   }
 }

@@ -1,21 +1,21 @@
-import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
-
-import createQueryLogger from '../loggers/query-logger';
-import { ProjectInfo } from '../enums/project-info.enum';
-
-// Notion SDK for JavaScript
 import { Client } from '@notionhq/client';
-const notion = new Client({ auth: process.env.NOTION_KEY });
+import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
+import { createQueryLogger } from '../loggers/query-logger';
 
-export async function getDatabaseSubscribedPages(
-  databaseId: string
-): Promise<QueryDatabaseResponse> {
+// Get the subscribed games pages from the database
+export async function getDatabaseSubscribedPages(): Promise<QueryDatabaseResponse> {
+  // Notion SDK for JavaScript
+  const notion = new Client({ auth: process.env.NOTION_KEY });
+
+  const databaseId = process.env.NOTION_DATABASE_ID as string;
+
   const subscriptionStatusColumnName = process.env
     .NOTION_DATABASE_SUBSCRIPTION_COLUMN_NAME as string;
 
   const subscriptionStatusPositiveValue = process.env
     .NOTION_DATABASE_SUBSCRIPTION_COLUMN_POSITIVE_VALUE_NAME as string;
 
+  // Query the database pages where the subscription status is positive
   const databaseSubscribedPages: QueryDatabaseResponse = await notion.databases.query({
     database_id: databaseId,
     filter: {
@@ -26,10 +26,8 @@ export async function getDatabaseSubscribedPages(
     },
   });
 
-  // Log the HTTP response only if in development mode
-  if (process.env.NODE_ENV === ProjectInfo.DEV_ENVIRONMENT) {
-    createQueryLogger('subscribed_database_pages').http(databaseSubscribedPages);
-  }
+  // Log the HTTP response
+  createQueryLogger('subscribed_database_pages').http(JSON.stringify(databaseSubscribedPages));
 
   return databaseSubscribedPages;
 }

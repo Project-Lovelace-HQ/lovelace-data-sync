@@ -1,0 +1,15 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "AzureWebJobsFeatureFlags": "EnableWorkerIndexing",
+    "AzureWebJobs.LovelaceDataSync.Disabled": "false",
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+    "NOTION_KEY": "<50-character key>",
+    "NOTION_DATABASE_ID": "<32-character key>",
+    "NOTION_DATABASE_SUBSCRIPTION_COLUMN_NAME": "<database column name that contains the user subscription intention>",
+    "NOTION_DATABASE_SUBSCRIPTION_COLUMN_POSITIVE_VALUE_NAME": "<value that will be considered true for a user subscribing to a game>",
+    "NOTION_DATABASE_LUDOPEDIA_URL_COLUMN_NAME": "<database column name that contains the ludopedia url>",
+    "NODE_ENV": "<development|production>"
+  }
+}

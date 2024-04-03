@@ -1,13 +1,11 @@
-import validator from 'validator';
-
 import {
   PageObjectResponse,
   QueryDatabaseResponse,
 } from '@notionhq/client/build/src/api-endpoints';
+import validator from 'validator';
+import { createLogger } from '../loggers/default-logger';
+import { createQueryLogger } from '../loggers/query-logger';
 import { LovelaceSubscribedGameUrl } from '../models/lovelace-subscribed-game-url.model';
-import logger from '../loggers/default-logger';
-import { ProjectInfo } from '../enums/project-info.enum';
-import createQueryLogger from '../loggers/query-logger';
 
 // Map the database pages to get the URLs
 export function mapDatabaseSubscribedPagesToLovelaceSubscribedGamesUrl(
@@ -16,7 +14,7 @@ export function mapDatabaseSubscribedPagesToLovelaceSubscribedGamesUrl(
   const databaseSubscribedPagesResult = databaseSubscribedPages.results as PageObjectResponse[];
 
   if (databaseSubscribedPagesResult.length === 0) {
-    logger.warn('No subscribed pages found');
+    createLogger().warn('No subscribed pages found');
     return [];
   }
 
@@ -40,7 +38,7 @@ export function mapDatabaseSubscribedPagesToLovelaceSubscribedGamesUrl(
     }
 
     if (!ludopediaUrlPageProperty.url || !validator.isURL(ludopediaUrlPageProperty.url)) {
-      logger.warn(`No valid URL found for page ${page.id}, skipping...`);
+      createLogger().warn(`No valid URL found for page ${page.id}, skipping...`);
       return;
     }
 
@@ -50,10 +48,8 @@ export function mapDatabaseSubscribedPagesToLovelaceSubscribedGamesUrl(
     });
   });
 
-  // Log the subscribed pages if in development mode
-  if (process.env.NODE_ENV === ProjectInfo.DEV_ENVIRONMENT) {
-    createQueryLogger('mapped_database_pages').http(lovelaceSubscribedGamesUrl);
-  }
+  // Log the subscribed pages
+  createQueryLogger('mapped_database_pages').http(JSON.stringify(lovelaceSubscribedGamesUrl));
 
   return lovelaceSubscribedGamesUrl;
 }

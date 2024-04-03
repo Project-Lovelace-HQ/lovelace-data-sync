@@ -2,5 +2,11 @@
   "editor.formatOnSave": true,
   "jest.runMode": {
     "type": "on-demand"
-  }
+  },
+  "azureFunctions.deploySubpath": ".",
+  "azureFunctions.postDeployTask": "npm install (functions)",
+  "azureFunctions.projectLanguage": "TypeScript",
+  "azureFunctions.projectRuntime": "~4",
+  "azureFunctions.projectLanguageModel": 4,
+  "azureFunctions.preDeployTask": "npm prune (functions)"
 }
