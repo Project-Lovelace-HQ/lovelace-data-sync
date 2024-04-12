@@ -9,7 +9,7 @@
     "clean": "rimraf dist",
     "build": "npm run lint && tsc",
     "watch": "npm run lint && tsc -w",
-    "lint": "eslint './src/**/*.{js,ts}'",
+    "lint": "eslint ./src --ext .js,.ts",
     "test": "jest",
     "test-no-coverage": "npm test -- --coverage=false",
     "prepare": "husky"
