@@ -9,17 +9,17 @@
     "clean": "rimraf dist",
     "build": "npm run lint && tsc",
     "watch": "npm run lint && tsc -w",
-    "lint": "eslint 'src/**/*.{js,ts}'",
+    "lint": "eslint './src/**/*.{js,ts}'",
     "test": "jest",
     "test-no-coverage": "npm test -- --coverage=false",
     "prepare": "husky"
   },
   "lint-staged": {
-    "src/**/*.{js,ts}": [
+    "./src/**/*.{js,ts}": [
       "eslint --fix",
       "prettier --write"
     ],
-    "test/**/*.{js,ts}": [
+    "./test/**/*.{js,ts}": [
       "eslint --fix",
       "prettier --write"
     ]
