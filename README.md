@@ -2,7 +2,7 @@
 
 This project is part of **Project Lovelace**, aiming to develop a price tracker for the [Ludopedia](https://ludopedia.com.br/) website, where a user can specify which games they want to track via a [Notion](https://www.notion.so) database.
 
-**Lovelace Data Sync** is an Azure Function app for interacting with the [Notion API](https://developers.notion.com/) to get the user's subscribed games and update its database contents after fetching the relevant data from another service. It is built with Node.js and TypeScript.
+**Lovelace Data Sync** is an Azure Function app for interacting with the [Notion API](https://developers.notion.com/) to get the user's subscribed games and update its database contents after fetching the relevant data from the [Lovelace Data Extractor](https://github.com/Project-Lovelace-HQ/lovelace-data-extractor) service. It is built with Node.js and TypeScript.
 
 ## Getting Started
 
