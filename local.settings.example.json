@@ -10,6 +10,7 @@
     "NOTION_DATABASE_SUBSCRIPTION_COLUMN_NAME": "<database column name that contains the user subscription intention>",
     "NOTION_DATABASE_SUBSCRIPTION_COLUMN_POSITIVE_VALUE_NAME": "<value that will be considered true for a user subscribing to a game>",
     "NOTION_DATABASE_LUDOPEDIA_URL_COLUMN_NAME": "<database column name that contains the ludopedia url>",
-    "NODE_ENV": "<development|production>"
+    "NODE_ENV": "<development|production>",
+    "EXTRACTOR_SERVICE_URL": "<url to the service that will extract the updated data>"
   }
 }
