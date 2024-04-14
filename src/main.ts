@@ -5,6 +5,8 @@ import { LovelaceSubscribedGameUrl } from './models/lovelace-subscribed-game-url
 import { getDatabaseSubscribedPages } from './notion-api/get-database-subscribed-pages';
 import { mapDatabaseSubscribedPagesToLovelaceSubscribedGamesUrl } from './notion-api/map-database-subscribed-pages';
 import { loadEnvironmentVariables } from './util/load-environment-variables';
+import { UpdatedSubscribedGameInfo } from './models/updated-subscribed-game-info.model';
+import { getUpdatedGamesInfoFromExtractorService } from './extractor-service/get-updated-games-info';
 
 export async function main(): Promise<HttpResponseInit> {
   try {
@@ -18,9 +20,13 @@ export async function main(): Promise<HttpResponseInit> {
     const subscribedGamesUrl: LovelaceSubscribedGameUrl[] =
       mapDatabaseSubscribedPagesToLovelaceSubscribedGamesUrl(databaseSubscribedPages);
 
+    // Fetch the subscribed games updated data from another service
+    const updatedSubscribedGamesInfo: UpdatedSubscribedGameInfo[] =
+      await getUpdatedGamesInfoFromExtractorService(subscribedGamesUrl);
+
     return {
       status: 200,
-      body: JSON.stringify(subscribedGamesUrl),
+      body: JSON.stringify(updatedSubscribedGamesInfo),
     };
   } catch (e) {
     let errorMessage = 'Internal server error';
