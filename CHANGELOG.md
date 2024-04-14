@@ -2,6 +2,10 @@
 
 > [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [3.1.0] - 2024-04-14
+- Create a timer trigger to start the service
+- Add a note about compatibility between services
+
 ## [3.0.0] - 2024-04-14
 - Now the service fetches and updates data through requests to an external extractor service
 

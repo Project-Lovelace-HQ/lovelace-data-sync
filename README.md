@@ -4,6 +4,9 @@ This project is part of **Project Lovelace**, aiming to develop a price tracker 
 
 **Lovelace Data Sync** is an Azure Function app for interacting with the [Notion API](https://developers.notion.com/) to get the user's subscribed games and update its database contents after fetching the relevant data from the [Lovelace Data Extractor](https://github.com/Project-Lovelace-HQ/lovelace-data-extractor) service. It is built with Node.js and TypeScript.
 
+> [!TIP]
+> Each major release of this repository is designed to be compatible with the corresponding major release of Lovelace Data Extractor. For instance, Lovelace Data Sync v2.0.0 is compatible with Lovelace Data Extractor v2.0.0. Using releases with mismatched major version numbers may lead to unexpected issues.
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
