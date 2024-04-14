@@ -38,6 +38,7 @@ For this project, you will need **NodeJS** in version 18+.
 - The `NOTION_DATABASE_ID` is from a database connected to the integration stated above and can be simply retrieved from the URL of the database. Should contain 32 characters.
 - The `NOTION_DATABASE_SUBSCRIPTION_COLUMN_NAME` is the **name** of the column in the database that defines if the user wants to fetch updates on that game's price. The column must be a `select` property.
 - The `NOTION_DATABASE_SUBSCRIPTION_COLUMN_POSITIVE_VALUE_NAME` is the **value** that should be in the property stated above for it to be accepted as true (if set to any other value the tracker will ignore this record).
+- The `NOTION_DATABASE_LOWEST_PRICE_COLUMN_NAME` is the **name** of the column in the database where the updated lowest game price will be saved. The column must be a `text` property.
 - The `NOTION_DATABASE_LUDOPEDIA_URL_COLUMN_NAME` is the **name** of the column in the database with the URL of the game on the Ludopedia website. The column must be a `URL` property.
 - `NODE_ENV` can either be **development** or **production**.
 - `EXTRACTOR_SERVICE_URL` is the service that will fetch and extract the updated data. In our case it's the [Lovelace Data Extractor](https://github.com/Project-Lovelace-HQ/lovelace-data-extractor) service. URL Example: `https://lovelacedataextractor.azurewebsites.net/api/LovelaceDataExtractor?code=<ACCESS_KEY>`.

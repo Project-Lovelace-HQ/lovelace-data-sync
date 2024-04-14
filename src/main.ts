@@ -7,6 +7,7 @@ import { mapDatabaseSubscribedPagesToLovelaceSubscribedGamesUrl } from './notion
 import { loadEnvironmentVariables } from './util/load-environment-variables';
 import { UpdatedSubscribedGameInfo } from './models/updated-subscribed-game-info.model';
 import { getUpdatedGamesInfoFromExtractorService } from './extractor-service/get-updated-games-info';
+import { updateDatabasePages } from './notion-api/update-database-pages';
 
 export async function main(): Promise<HttpResponseInit> {
   try {
@@ -23,6 +24,9 @@ export async function main(): Promise<HttpResponseInit> {
     // Fetch the subscribed games updated data from another service
     const updatedSubscribedGamesInfo: UpdatedSubscribedGameInfo[] =
       await getUpdatedGamesInfoFromExtractorService(subscribedGamesUrl);
+
+    // Update data in the Notion API
+    await updateDatabasePages(updatedSubscribedGamesInfo);
 
     return {
       status: 200,
