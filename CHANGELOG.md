@@ -2,7 +2,7 @@
 
 > [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
-## [3.1.0] - 2024-04-14
+## [3.1.0] - 2024-04-19
 - Create a timer trigger to start the service
 - Add a note about compatibility between services
 
