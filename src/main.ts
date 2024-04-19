@@ -57,3 +57,8 @@ app.http('LovelaceDataSync', {
   authLevel: 'function',
   handler: main,
 });
+
+app.timer('TimerTrigger', {
+  schedule: '0 0 22 * * *',
+  handler: main,
+});
