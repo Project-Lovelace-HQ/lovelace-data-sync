@@ -15,24 +15,31 @@ export async function updateDatabasePages(updatedGamesInfo: UpdatedSubscribedGam
 
   updatedGamesInfo.forEach(async (updatedGameInfo) => {
     const pageId = updatedGameInfo.id;
+    let price_content = '';
+
+    if (typeof updatedGameInfo.response === 'string') {
+      price_content = updatedGameInfo.response;
+    }
 
     if (typeof updatedGameInfo.response === 'object') {
-      await notion.pages.update({
-        page_id: pageId,
-        properties: {
-          [lowestPriceColumnName]: {
-            rich_text: [
-              {
-                type: 'text',
-                text: {
-                  content: formatter.format(updatedGameInfo.response.price),
-                },
-              },
-            ],
-            type: 'rich_text',
-          },
-        },
-      });
+      price_content = formatter.format(updatedGameInfo.response.price);
     }
+
+    await notion.pages.update({
+      page_id: pageId,
+      properties: {
+        [lowestPriceColumnName]: {
+          rich_text: [
+            {
+              type: 'text',
+              text: {
+                content: price_content,
+              },
+            },
+          ],
+          type: 'rich_text',
+        },
+      },
+    });
   });
 }
