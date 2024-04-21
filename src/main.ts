@@ -59,6 +59,6 @@ app.http('LovelaceDataSync', {
 });
 
 app.timer('TimerTrigger', {
-  schedule: '0 0 22 * * *',
+  schedule: '0 0 8 * * *',
   handler: main,
 });
