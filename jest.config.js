@@ -6,4 +6,5 @@ module.exports = {
   collectCoverageFrom: ['./src/**'],
   testPathIgnorePatterns: ['./dist/'],
   coverageReporters: ['json', 'lcov', 'text', 'clover'],
+  setupFilesAfterEnv: ['./jest.setup.ts'],
 };
