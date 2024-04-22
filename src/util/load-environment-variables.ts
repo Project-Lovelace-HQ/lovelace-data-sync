@@ -3,7 +3,20 @@ interface RequiredVariable {
   expectedLength?: number;
 }
 
-export function loadEnvironmentVariables() {
+class EnvironmentVariableError extends Error {
+  constructor(message?: string) {
+    super(message);
+    this.name = 'EnvironmentVariableError';
+  }
+}
+
+/**
+ * Load the required environment variables and check for errors
+ *
+ * @export
+ * @throws {EnvironmentVariableError} If any of the required environment variables are missing or invalid
+ */
+export function loadEnvironmentVariables(): void {
   const requiredVariables: RequiredVariable[] = [
     { name: 'NOTION_DATABASE_ID', expectedLength: 32 },
     { name: 'NOTION_KEY', expectedLength: 50 },
@@ -28,6 +41,6 @@ export function loadEnvironmentVariables() {
   }
 
   if (errors.length > 0) {
-    throw new Error(errors.join('\n'));
+    throw new EnvironmentVariableError(errors.join('\n'));
   }
 }

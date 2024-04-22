@@ -1,3 +1,4 @@
+// Interface for the response from the extractor service
 export interface UpdatedSubscribedGameInfo {
   id: string;
   error: boolean;
