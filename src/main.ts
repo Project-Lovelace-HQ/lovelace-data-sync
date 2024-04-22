@@ -4,7 +4,7 @@ import { createLogger } from './loggers/default-logger';
 import { LovelaceSubscribedGameInfo } from './models/lovelace-subscribed-game-info.model';
 import { getDatabaseSubscribedPages } from './notion-api/get-database-subscribed-pages';
 import { mapDatabasePagesToSubscribedGameInfoList } from './notion-api/map-database-subscribed-pages';
-import { loadEnvironmentVariables } from './util/load-environment-variables';
+import { validateEnvironmentVariables } from './util/environment-variables/validate-environment-variables';
 import { UpdatedSubscribedGameInfo } from './models/updated-subscribed-game-info.model';
 import { getUpdatedGamesInfoFromExtractorService } from './extractor-service/get-updated-games-info';
 import { updateDatabaseSubscribedPages } from './notion-api/update-database-subscribed-pages';
@@ -17,8 +17,8 @@ import { updateDatabaseSubscribedPages } from './notion-api/update-database-subs
 
 export async function main(): Promise<HttpResponseInit> {
   try {
-    // Load the environment variables and check for errors
-    loadEnvironmentVariables();
+    // Validate the application environment variables
+    validateEnvironmentVariables();
 
     // Start the process by getting the database pages from the Notion API
     const databaseSubscribedPages: QueryDatabaseResponse = await getDatabaseSubscribedPages();
