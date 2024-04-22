@@ -1,5 +1,6 @@
 import { Client } from '@notionhq/client';
 import { UpdatedSubscribedGameInfo } from '../models/updated-subscribed-game-info.model';
+import { CurrencyFormatter } from '../util/formatters/currency-formatter.util';
 
 /**
  * Update the retrieved data to the database pages
@@ -17,10 +18,7 @@ export async function updateDatabaseSubscribedPages(
 
   const lowestPriceColumnName = process.env.NOTION_DATABASE_LOWEST_PRICE_COLUMN_NAME as string;
 
-  const formatter = new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-  });
+  const formatter = CurrencyFormatter;
 
   // Update the database pages one by one
   updatedGamesInfo.forEach(async (updatedGameInfo) => {
