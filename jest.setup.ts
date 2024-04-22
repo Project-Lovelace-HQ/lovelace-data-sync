@@ -1,13 +1,18 @@
-import { MockNotionQueryDatabaseResponse } from './test/resources/notion-query-database-response-example.model';
+import { MockNotionQueryDatabaseResponse } from './test/resources/notion-query-database-response.mock';
 
-export const mockQuery = jest.fn().mockResolvedValue(MockNotionQueryDatabaseResponse);
+export const mockQueryResponse = jest.fn().mockResolvedValue(MockNotionQueryDatabaseResponse);
+
+export const mockUpdateResponse = jest.fn().mockResolvedValue({});
 
 jest.mock('@notionhq/client', () => {
   return {
     Client: jest.fn().mockImplementation(() => {
       return {
         databases: {
-          query: mockQuery,
+          query: mockQueryResponse,
+        },
+        pages: {
+          update: mockUpdateResponse,
         },
       };
     }),

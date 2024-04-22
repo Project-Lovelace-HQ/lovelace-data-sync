@@ -1,6 +1,6 @@
 import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 import { mapDatabasePagesToSubscribedGameInfoList } from '../../src/notion-api/map-database-subscribed-pages';
-import { MockNotionQueryDatabaseResponse } from '../resources/notion-query-database-response-example.model';
+import { MockNotionQueryDatabaseResponse } from '../resources/notion-query-database-response.mock';
 
 const ludopediaUrlColumnName = 'URL';
 

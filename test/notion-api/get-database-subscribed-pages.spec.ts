@@ -1,13 +1,13 @@
-import { mockQuery } from '../../jest.setup';
+import { mockQueryResponse } from '../../jest.setup';
 import { getDatabaseSubscribedPages } from '../../src/notion-api/get-database-subscribed-pages';
-import { MockNotionQueryDatabaseResponse } from '../resources/notion-query-database-response-example.model';
+import { MockNotionQueryDatabaseResponse } from '../resources/notion-query-database-response.mock';
 
 describe('getDatabaseSubscribedPages', () => {
   it('should query the database and return the response', async () => {
     const result = await getDatabaseSubscribedPages();
 
     expect(result).toBe(MockNotionQueryDatabaseResponse);
-    expect(mockQuery).toHaveBeenCalledWith({
+    expect(mockQueryResponse).toHaveBeenCalledWith({
       database_id: process.env.NOTION_DATABASE_ID,
       filter: {
         property: process.env.NOTION_DATABASE_SUBSCRIPTION_COLUMN_NAME,
