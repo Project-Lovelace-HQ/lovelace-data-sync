@@ -4,5 +4,6 @@ module.exports = {
   testEnvironment: 'node',
   collectCoverage: true,
   collectCoverageFrom: ['./src/**'],
+  testPathIgnorePatterns: ['./dist/'],
   coverageReporters: ['json', 'lcov', 'text', 'clover'],
 };
